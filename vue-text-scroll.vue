@@ -16,12 +16,10 @@
     direction: 1, // 0 往下 1 往上
     openTouch: true, //开启移动端touch
     singleHeight: 0, //单条数据高度有值hoverStop关闭
-    singleWidth: 0, //单条数据宽度有值hoverStop关闭
     waitTime: 1000, //单步停止等待时间
     autoPlay: true,
     switchDelay: 400,
-    switchDisabledClass: 'disabled',
-    isSingleRemUnit: false // singleWidth/singleHeight 是否开启rem度量
+    isSingleRemUnit: false // singleHeight 是否开启rem度量
   }
   export default {
     name: 'vue-text-scroll',
@@ -73,9 +71,6 @@
       baseFontSize () {
         return this.options.isSingleRemUnit ? parseInt(window.getComputedStyle(document.documentElement, null).fontSize) : 1
       },
-      realSingleStopWidth () {
-        return this.options.singleWidth * this.baseFontSize
-      },
       realSingleStopHeight () {
         return this.options.singleHeight * this.baseFontSize
       }
@@ -116,14 +111,6 @@
             if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
             if (!!this.realSingleStopHeight) { //是否启动了单行暂停配置
               if (Math.abs(this.yPos) % this.realSingleStopHeight < 1) { // 符合条件暂停waitTime
-                this.singleWaitTime = setTimeout(() => {
-                  this._move()
-                }, this.options.waitTime)
-              } else {
-                this._move()
-              }
-            } else if (!!this.realSingleStopWidth) {
-              if (Math.abs(this.xPos) % this.realSingleStopWidth < 1) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)
