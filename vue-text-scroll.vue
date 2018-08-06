@@ -87,7 +87,7 @@
       enter () {
         if (this.hoverStop) return
         this.isHover = true //关闭_move
-        // 防止蛋疼的人频频hover进出单步滚动 导致定时器乱掉
+        // 防止频繁hover进出单步滚动 导致定时器乱掉
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
         this._cancle()
       },
@@ -162,7 +162,7 @@
       },
       _dataWarm (data) {
         if (data.length > 100) {
-          console.warn(`数据达到了${data.length}条有点多哦~,可能会造成部分老旧浏览器卡顿。`);
+          console.warn(`数据达到了${data.length}条,可能会造成部分老旧浏览器卡顿。`);
         }
       },
       arrayEqual(arr1, arr2) {
